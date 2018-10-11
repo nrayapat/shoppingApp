@@ -20,7 +20,7 @@ public interface OrderService {
 
 	public Order submitOrder(Order order);
 
-	public void cancelOrder(int orderId) throws OrderNotFoundException;
+	public Order cancelOrder(int orderId) throws OrderNotFoundException;
 
-	public void deleteOrder(Order order) throws OrderNotFoundException;
+	public void deleteOrder(int orderId) throws OrderNotFoundException;
 }

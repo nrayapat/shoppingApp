@@ -6,6 +6,7 @@ package com.capgemini.onlineshopping.service.impl;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,20 +70,35 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order submitOrder(Order order) {
 		order.setOrderDate(LocalDate.now());
-		order.setItems(itemCart.get(order.getCustomerId()));
+		
 		return orderRepository.save(order);
 	}
 
 	@Override
-	public void cancelOrder(int orderId) throws OrderNotFoundException {
-		// TODO Auto-generated method stub
+	public Order cancelOrder(int orderId) throws OrderNotFoundException {
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+		if(optionalOrder.isPresent()) {
+			optionalOrder.get().setStatus(false);
+			orderRepository.save(optionalOrder.get());
+			return optionalOrder.get();
+		}
+		throw new OrderNotFoundException("Order does not exist!");
+			
+		
+		
 
 	}
 
 	@Override
-	public void deleteOrder(Order order) throws OrderNotFoundException {
+	public void deleteOrder(int orderId) throws OrderNotFoundException {
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+		if (optionalOrder.isPresent()) {
+			orderRepository.deleteById(orderId);
+		}
+		else
+			throw new OrderNotFoundException("Order does not exist!");
+		}
 		// TODO Auto-generated method stub
 
 	}
 
-}

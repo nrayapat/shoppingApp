@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.onlineshopping.entity.LineItem;
@@ -39,10 +40,21 @@ public class OrderController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PostMapping("/shopping/submitorder")
+	@PostMapping("/shopping/order")
 	public ResponseEntity<Order> submitOrder(@RequestBody Order order) {
 		return new ResponseEntity<Order>(orderService.submitOrder(order), HttpStatus.OK);
 
 	}
+	@GetMapping("/shopping/cancel")
+	public ResponseEntity<Order> cancelOrder(@RequestParam int orderId){
+		return new ResponseEntity<Order>(orderService.cancelOrder(orderId), HttpStatus.OK);
+	}
 
+	@DeleteMapping("/shopping/delete")
+	public ResponseEntity<Order> deleteOrder(@RequestParam int orderId){
+		orderService.deleteOrder( orderId);
+		return new ResponseEntity<Order>(HttpStatus.OK);
+	}
+	
+	
 }

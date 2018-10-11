@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Customer {
 
 	@Id
-	private int CustomerId;
+	private int customerId;
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerEmail;
@@ -32,7 +32,7 @@ public class Customer {
 			String customerPassword, String houseNumber, String street, String city, String state, int zip,
 			String country) {
 		super();
-		CustomerId = customerId;
+		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
 		this.customerEmail = customerEmail;
@@ -47,12 +47,12 @@ public class Customer {
 
 
 	public int getCustomerId() {
-		return CustomerId;
+		return customerId;
 	}
 
 
 	public void setCustomerId(int customerId) {
-		CustomerId = customerId;
+		this.customerId = customerId;
 	}
 
 
@@ -158,7 +158,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [CustomerId=" + CustomerId + ", customerFirstName=" + customerFirstName + ", customerLastName="
+		return "Customer [CustomerId=" + customerId + ", customerFirstName=" + customerFirstName + ", customerLastName="
 				+ customerLastName + ", customerEmail=" + customerEmail + ", customerPassword=" + customerPassword
 				+ ", houseNumber=" + houseNumber + ", street=" + street + ", city=" + city + ", state=" + state
 				+ ", zip=" + zip + ", country=" + country + "]";
